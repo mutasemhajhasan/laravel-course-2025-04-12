@@ -22,8 +22,10 @@ Route::get('/posts', function () {
 });
 
 Route::post('/posts', function () {
+
     // $contnt=request('content');
 
-    // dd( Request::post('content'));
-    return view('posts');
+  return redirect('/');
+
+    // return view('posts');
 });
