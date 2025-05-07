@@ -20,13 +20,7 @@ Route::get('/posts', function () {
 });
 
 Route::post('/posts', function () {
-    // $file=request()->file('file');
-    // $path=$file->store('assets/images','public');
-    // dd(asset("storage/$path"));
-    // $contnt=request('content');
-
     return redirect('/');
-
     // return view('posts');
 });
 
@@ -34,4 +28,7 @@ Route::get('/categories/create', [CategoryController::class, 'create'])->name('c
 
 Route::post('/categories', [CategoryController::class, 'store']);
 
-Route::get('/categories', [CategoryController::class, 'index']);
+Route::get('/categories', [CategoryController::class, 'index'])->name('categories.list');
+Route::get('/categories/{id}/delete', [CategoryController::class, 'delete'])->name('categories.delete');
+Route::get('/categories/{id}/edit', [CategoryController::class, 'edit'])->name('categories.edit');
+Route::post('/categories/{id}/update', [CategoryController::class, 'update'])->name('categories.update');
