@@ -3,15 +3,6 @@
   width: 1rem;
   height: 1rem;
 }
-.data{
-    min-width: 600px;
-    border: solid;
-    border-width: 1px;
-}
-.data td{
-    border: solid;
-    border-width: 1px;
-}
 
 /*
  * Sidebar
