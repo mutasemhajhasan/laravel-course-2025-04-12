@@ -18,7 +18,7 @@ class CategoryController extends Controller
 
     public function create()
     {
-        return view('category-create');
+        return view('category.category-create');
     }
 
     public function index()
@@ -29,7 +29,7 @@ class CategoryController extends Controller
         $categories = Category::
         orderBy('id','ASC')
         ->paginate(5);
-        return view('category-list', ['categories' => $categories]);
+        return view('category.category-list', ['categories' => $categories]);
     }
 
     public function delete(Request $request)
@@ -44,7 +44,7 @@ class CategoryController extends Controller
 
     public function edit(Request $request) {
         $category = Category::findOrFail($request->id);
-        return view('category-edit',['category'=>$category]);
+        return view('category.category-edit',['category'=>$category]);
     }
 
     public function update(Request $request) {
