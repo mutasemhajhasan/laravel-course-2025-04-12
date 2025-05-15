@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -25,15 +26,30 @@ class AuthController extends Controller
                 'password' => $request->password,
             ])
         ) {
-            if (Auth::user()->role == 'admin') {
+        if (Auth::user()->can('create cat')  ) {
                 return redirect('/categories');
-            } elseif (Auth::user()->role == 'member') {
+            } else {
                 return redirect('/');
             }
-            else{
-                abort(403);
-            }
+
         }
         return view('login', ['login_error' => 'Invalid info']);
     }
+
+    public function register(Request $request){
+        $user=User::create(
+            [
+                'name'=>$request->name,
+                'email'=>$request->email,
+                'password'=>bcrypt($request->password),
+            ]
+            );
+            $user->assignRole('member');
+            return redirect(route('login'));
+    }
+
+    public function createRegister(Request $request){
+        return view('register');
+    }
+
 }
