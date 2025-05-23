@@ -24,13 +24,13 @@ class PostsController extends Controller
         $imageFile=$request->file('image');
        $path= $imageFile->store('images','public');
        //public/images/randomName.jpg
-       Post::create([
+       $post=Post::create([
         'title'=>$request->title,
         'content'=>$request->content,
         'image_path'=>$path,
         'user_id'=>Auth::user()->id,
-        'category_id'=>$request->category_id,
        ]);
+       $post->categories()->attach($request->category_ids);
         return redirect('/posts');
     }
 
@@ -40,7 +40,8 @@ class PostsController extends Controller
         //     logger($query->sql);
         // });
         $posts = Post::
-        orderBy('id','ASC')
+        with('categories')
+        ->orderBy('id','ASC')
         ->paginate(5);
         return view('post.post-list', ['posts' => $posts]);
     }

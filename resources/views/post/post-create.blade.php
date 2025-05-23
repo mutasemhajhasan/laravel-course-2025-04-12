@@ -16,7 +16,7 @@
             autofocus="">
             <br>
         <label for="category_id" class="sr-only">Catogry</label>
-        <select name="category_id" id="category_id" class="form-control" placeholder="category_id" required=""
+        <select name="category_ids[]" id="category_id" class="form-control" placeholder="category_id" required="" multiple
             autofocus="">
             @foreach ($cats as $c)
                 <option value="{{ $c->id }}">
